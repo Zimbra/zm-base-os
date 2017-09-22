@@ -1,0 +1,85 @@
+version: 2
+
+############################################################################
+
+references:
+   devcore_job_steps: &devcore_job_steps
+      steps:
+         - checkout
+         - setup_remote_docker
+         - restore_cache:
+            keys:
+               - v1-{{.Environment.CIRCLE_JOB}}-{{.Branch}}
+            paths:
+               - /caches
+         - run:
+            name: Creating image
+            command: |
+               mkdir -p /caches
+               ls /etc/*release*
+               cat /etc/issue
+               apk update
+               apk add make
+               make IMAGES=$CIRCLE_JOB CACHES_DIR=/caches
+         - save_cache:
+            key: v1-{{.Environment.CIRCLE_JOB}}-{{.Branch}}
+            paths:
+               - /caches
+         - deploy:
+            name: Pushing image
+            command: |
+               echo "Docker User: $DOCKER_USER"
+               docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+               make IMAGES=$CIRCLE_JOB CACHES_DIR=/caches push
+
+############################################################################
+
+jobs:
+   core-ubuntu:
+      working_directory: ~/zm-base-os
+      docker:
+         - image: docker:latest
+      <<: *devcore_job_steps
+
+   devcore-ubuntu-16.04:
+      working_directory: ~/zm-base-os
+      docker:
+         - image: docker:latest
+      <<: *devcore_job_steps
+
+   devcore-ubuntu-14.04:
+      working_directory: ~/zm-base-os
+      docker:
+         - image: docker:latest
+      <<: *devcore_job_steps
+
+   devcore-ubuntu-12.04:
+      working_directory: ~/zm-base-os
+      docker:
+         - image: docker:latest
+      <<: *devcore_job_steps
+
+   devcore-centos-6:
+      working_directory: ~/zm-base-os
+      docker:
+         - image: docker:latest
+      <<: *devcore_job_steps
+
+   devcore-centos-7:
+      working_directory: ~/zm-base-os
+      docker:
+         - image: docker:latest
+      <<: *devcore_job_steps
+
+############################################################################
+
+workflows:
+   version: 2
+   build_and_deploy:
+      jobs:
+         - devcore-ubuntu-16.04
+         - devcore-ubuntu-14.04
+         - devcore-ubuntu-12.04
+         - devcore-centos-6
+         - devcore-centos-7
+         - core-ubuntu
