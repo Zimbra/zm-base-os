@@ -21,6 +21,7 @@ RUN apt-get -qq install -y awscli
 
 # USERS
 RUN useradd -ms /bin/bash -G sudo ubuntu
+RUN sed -i -e '/^%sudo/s/)\s*ALL$/) NOPASSWD: ALL/' /etc/sudoers
 
 # REDUCE PRIVILEGE
 USER ubuntu

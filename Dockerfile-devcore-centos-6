@@ -16,6 +16,7 @@ RUN yum install -y rpm-build createrepo
 
 # USERS
 RUN useradd -ms /bin/bash -G wheel build
+RUN sed -i -e 's/^#\s*\(%wheel.*NOPASSWD.*\)/\1/' /etc/sudoers
 
 # Install missing java dependencies
 RUN mkdir -p /home/build/.zm-dev-tools/

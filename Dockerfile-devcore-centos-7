@@ -16,6 +16,7 @@ RUN yum install -y rpm-build createrepo
 
 # USERS
 RUN useradd -ms /bin/bash -G wheel build
+RUN sed -i -e '/^%wheel/s/)\s*ALL$/) NOPASSWD: ALL/' /etc/sudoers
 
 # REDUCE PRIVILEGE
 USER build
