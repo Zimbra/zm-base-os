@@ -32,6 +32,13 @@ references:
                docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
                make IMAGES=$CIRCLE_JOB CACHES_DIR=/caches push
 
+   std_filters: &std_filters
+      filters:
+         branches:
+            only:
+               - master
+               - develop
+
 ############################################################################
 
 jobs:
@@ -77,9 +84,20 @@ workflows:
    version: 2
    build_and_deploy:
       jobs:
-         - devcore-ubuntu-16.04
-         - devcore-ubuntu-14.04
-         - devcore-ubuntu-12.04
-         - devcore-centos-6
-         - devcore-centos-7
-         - core-ubuntu
+         - devcore-ubuntu-16.04:
+            <<: *std_filters
+
+         - devcore-ubuntu-14.04:
+            <<: *std_filters
+
+         - devcore-ubuntu-12.04:
+            <<: *std_filters
+
+         - devcore-centos-6:
+            <<: *std_filters
+
+         - devcore-centos-7:
+            <<: *std_filters
+
+         - core-ubuntu:
+            <<: *std_filters
