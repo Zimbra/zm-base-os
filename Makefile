@@ -4,6 +4,7 @@ IMAGES += devcore-ubuntu-14.04
 IMAGES += devcore-ubuntu-12.04
 IMAGES += devcore-centos-7
 IMAGES += devcore-centos-6
+IMAGES += devcore-docker
 IMAGES += core-ubuntu
 
 CACHES_DIR =
