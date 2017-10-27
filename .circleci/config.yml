@@ -6,7 +6,8 @@ references:
    devcore_job_steps: &devcore_job_steps
       steps:
          - checkout
-         - setup_remote_docker
+         - setup_remote_docker:
+            version: 17.09.0-ce
          - restore_cache:
             keys:
                - v1-{{.Environment.CIRCLE_JOB}}-{{.Branch}}
@@ -16,21 +17,22 @@ references:
             name: Creating image
             command: |
                mkdir -p /caches
-               ls /etc/*release*
-               cat /etc/issue
                apk update
                apk add make
                make IMAGES=$CIRCLE_JOB CACHES_DIR=/caches
          - save_cache:
-            key: v1-{{.Environment.CIRCLE_JOB}}-{{.Branch}}
+            key: v1-{{.Environment.CIRCLE_JOB}}-{{.Branch}}-{{epoch}}
             paths:
                - /caches
          - deploy:
             name: Pushing image
             command: |
-               echo "Docker User: $DOCKER_USER"
-               docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-               make IMAGES=$CIRCLE_JOB CACHES_DIR=/caches push
+               if [ "${CIRCLE_BRANCH}" == "master" ] || [ "${CIRCLE_BRANCH}" == "develop" ]
+               then
+                  echo "Docker User: $DOCKER_USER"
+                  docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+                  make IMAGES=$CIRCLE_JOB CACHES_DIR=/caches push
+               fi
 
    std_filters: &std_filters
       filters:
