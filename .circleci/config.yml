@@ -47,37 +47,37 @@ jobs:
    core-ubuntu:
       working_directory: ~/zm-base-os
       docker:
-         - image: docker:latest
+         - image: docker:git
       <<: *devcore_job_steps
 
    devcore-ubuntu-16.04:
       working_directory: ~/zm-base-os
       docker:
-         - image: docker:latest
+         - image: docker:git
       <<: *devcore_job_steps
 
    devcore-ubuntu-14.04:
       working_directory: ~/zm-base-os
       docker:
-         - image: docker:latest
+         - image: docker:git
       <<: *devcore_job_steps
 
    devcore-ubuntu-12.04:
       working_directory: ~/zm-base-os
       docker:
-         - image: docker:latest
+         - image: docker:git
       <<: *devcore_job_steps
 
    devcore-centos-6:
       working_directory: ~/zm-base-os
       docker:
-         - image: docker:latest
+         - image: docker:git
       <<: *devcore_job_steps
 
    devcore-centos-7:
       working_directory: ~/zm-base-os
       docker:
-         - image: docker:latest
+         - image: docker:git
       <<: *devcore_job_steps
 
 ############################################################################
