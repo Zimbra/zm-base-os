@@ -1,0 +1,3 @@
+ENV VARIABLES: (used by deploy_ec2)
+   DOCKER_USER = user at hub.docker.com
+   DOCKER_PASS = password for above user
