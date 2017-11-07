@@ -9,14 +9,11 @@ IMAGES += core-ubuntu
 
 CACHES_DIR =
 
-PUSH_IMGS = $(patsubst %,.push-%,$(IMAGES))
-BUILD_IMGS = $(patsubst %,.build-%,$(IMAGES))
+all: $(patsubst %,.build-%,$(IMAGES))
 
-all: $(BUILD_IMGS)
+push: $(patsubst %,.push-%,$(IMAGES))
 
-push: $(PUSH_IMGS)
-
-$(BUILD_IMGS): .build-% : Dockerfile-%
+.build-% : Dockerfile-%
 	-@if test -n '$(CACHES_DIR)'; \
 	 then \
 	    mkdir -p $(CACHES_DIR); \
@@ -34,11 +31,6 @@ $(BUILD_IMGS): .build-% : Dockerfile-%
 	    set -x; \
 	    docker save -o $(CACHES_DIR)/$*.tar zimbra/zm-base-os:$*; \
 	 fi
-	@touch $@
 
-$(PUSH_IMGS): .push-% : .build-%
+.push-%:
 	docker push zimbra/zm-base-os:$*
-	@touch $@
-
-clean:
-	@rm -f $(PUSH_IMGS) $(BUILD_IMGS)
