@@ -21,7 +21,7 @@ RUN sed -i -e 's/^#\s*\(%wheel.*NOPASSWD.*\)/\1/' /etc/sudoers
 # Install missing java dependencies
 RUN mkdir -p /home/build/.zm-dev-tools/
 RUN wget "http://mirror.metrocast.net/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz" -O - | tar --no-same-owner -xzf - -C /home/build/.zm-dev-tools/
-RUN wget "https://www.apache.org/dist/ant/binaries/apache-ant-1.9.9-bin.tar.gz"                          -O - | tar --no-same-owner -xzf - -C /home/build/.zm-dev-tools/
+RUN wget "https://www.apache.org/dist/ant/binaries/apache-ant-1.9.13-bin.tar.gz"                          -O - | tar --no-same-owner -xzf - -C /home/build/.zm-dev-tools/
 
 # Use a newer git
 RUN yum install -y zlib-devel gettext

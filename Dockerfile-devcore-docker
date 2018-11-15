@@ -18,7 +18,7 @@ RUN apt-get -qq install -y sudo
 RUN apt-get -qq install -y git perl
 RUN apt-get -qq install -y openssl
 RUN apt-get -qq install -y make
-RUN apt-get -qq install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
+#RUN apt-get -qq install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 RUN apt-get -qq update
