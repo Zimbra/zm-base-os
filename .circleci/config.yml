@@ -50,6 +50,12 @@ jobs:
          - image: docker:git
       <<: *devcore_job_steps
 
+   devcore-ubuntu-18.04:
+      working_directory: ~/zm-base-os
+      docker:
+         - image: docker:git
+      <<: *devcore_job_steps
+
    devcore-ubuntu-16.04:
       working_directory: ~/zm-base-os
       docker:
@@ -92,6 +98,9 @@ workflows:
 #            <<: *std_filters
 
       jobs:
+         - devcore-ubuntu-18.04:
+            <<: *std_filters
+
          - devcore-ubuntu-16.04:
             <<: *std_filters
 

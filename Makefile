@@ -1,4 +1,5 @@
 IMAGES =
+IMAGES += devcore-ubuntu-18.04
 IMAGES += devcore-ubuntu-16.04
 IMAGES += devcore-ubuntu-14.04
 IMAGES += devcore-ubuntu-12.04
