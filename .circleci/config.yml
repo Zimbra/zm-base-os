@@ -86,6 +86,12 @@ jobs:
          - image: docker:git
       <<: *devcore_job_steps
 
+   devcore-centos-8:
+      working_directory: ~/zm-base-os
+      docker:
+         - image: docker:git
+      <<: *devcore_job_steps
+
 ############################################################################
 
 workflows:
@@ -114,6 +120,9 @@ workflows:
             <<: *std_filters
 
          - devcore-centos-7:
+            <<: *std_filters
+
+         - devcore-centos-8:
             <<: *std_filters
 
          - core-ubuntu:
