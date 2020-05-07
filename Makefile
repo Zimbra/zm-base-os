@@ -3,6 +3,7 @@ IMAGES += devcore-ubuntu-18.04
 IMAGES += devcore-ubuntu-16.04
 IMAGES += devcore-ubuntu-14.04
 IMAGES += devcore-ubuntu-12.04
+IMAGES += devcore-centos-8
 IMAGES += devcore-centos-7
 IMAGES += devcore-centos-6
 IMAGES += devcore-docker
