@@ -18,6 +18,16 @@ RUN yum install -y rpm-build createrepo
 RUN useradd -ms /bin/bash -G wheel build
 RUN sed -i -e '/^%wheel/s/)\s*ALL$/) NOPASSWD: ALL/' /etc/sudoers
 
+# Use a newer git
+RUN yum install -y zlib-devel gettext curl-devel
+RUN wget "https://www.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz" -O - | tar --no-same-owner -xzf - -C /root
+RUN cd /root/git-2.9.5 && ./configure --without-tcltk
+RUN make -C /root/git-2.9.5
+RUN make -C /root/git-2.9.5 install
+RUN yum erase -y zlib-devel gettext
+RUN yum erase -y git
+RUN rm -rf /root/git-2.9.5
+
 # REDUCE PRIVILEGE
 USER build
 WORKDIR /home/build
