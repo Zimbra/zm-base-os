@@ -110,7 +110,7 @@ workflows:
 #            <<: *std_filters
 
       jobs:
-	 - devcore-ubuntu-20.04:
+         - devcore-ubuntu-20.04:
             <<: *std_filters
          - devcore-ubuntu-18.04:
             <<: *std_filters
