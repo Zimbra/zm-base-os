@@ -92,6 +92,12 @@ jobs:
          - image: docker:git
       <<: *devcore_job_steps
 
+   devcore-ubuntu-20.04:
+      working_directory: ~/zm-base-os
+      docker:
+         - image: docker:git
+      <<: *devcore_job_steps
+
 ############################################################################
 
 workflows:
@@ -104,26 +110,5 @@ workflows:
 #            <<: *std_filters
 
       jobs:
-         - devcore-ubuntu-18.04:
-            <<: *std_filters
-
-         - devcore-ubuntu-16.04:
-            <<: *std_filters
-
-         - devcore-ubuntu-14.04:
-            <<: *std_filters
-
-         - devcore-ubuntu-12.04:
-            <<: *std_filters
-
-         - devcore-centos-6:
-            <<: *std_filters
-
-         - devcore-centos-7:
-            <<: *std_filters
-
-         - devcore-centos-8:
-            <<: *std_filters
-
-         - core-ubuntu:
+         - devcore-ubuntu-20.04:
             <<: *std_filters
