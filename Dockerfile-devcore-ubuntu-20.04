@@ -28,3 +28,4 @@ RUN echo "build   ALL=(ALL)      NOPASSWD:ALL" >> /etc/sudoers
 # REDUCE PRIVILEGE
 USER build
 WORKDIR /home/build
+RUN sudo chown -R build:build /home/build/
