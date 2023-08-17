@@ -1,0 +1,31 @@
+# vi:ft=dockerfile
+FROM centos:7
+
+# SYSTEM
+RUN yum clean all
+RUN yum upgrade -y
+RUN yum install -y curl wget which
+RUN yum install -y sudo
+
+# ENVIRONMENT
+RUN yum update
+RUN yum install -y git perl ruby
+RUN yum install -y perl-Data-Dumper perl-IPC-Cmd
+RUN yum install -y gcc gcc-c++ make
+RUN yum install -y java-1.8.0-openjdk ant ant-junit maven
+RUN yum install -y rpm-build createrepo zlib* rsync
+RUN curl https://rclone.org/install.sh | sudo bash
+
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
+# USER
+RUN groupadd --gid 1000 jenkins \
+    && useradd --uid 1000 --gid 1000 -m jenkins \
+    && echo jenkins ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/jenkins \
+    && chmod 0440 /etc/sudoers.d/jenkins \
+    && chown -R 1000:1000 /home/jenkins
+
+USER jenkins
+WORKDIR /home/jenkins
