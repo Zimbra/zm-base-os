@@ -13,6 +13,7 @@ RUN apt-get -qq install -y curl wget
 RUN apt-get -qq install -y software-properties-common
 RUN apt-get -qq install -y apt-transport-https
 RUN apt-get -qq install -y sudo
+RUN apt-get -qq install -y rsync
 
 # ENVIRONMENT
 RUN apt-get -qq install -y git perl ruby pkg-config libidn11-dev libwww-perl libz-dev libaio-dev libncurses-dev libexpat-dev libpcre3-dev libperl-dev libpopt-dev libbz2-dev libtest-simple-perl libsocket6-perl libtest-inter-perl libtest-warn-perl libtest-deep-perl debhelper
