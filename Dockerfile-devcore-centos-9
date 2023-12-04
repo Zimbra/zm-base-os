@@ -12,6 +12,7 @@ RUN yum install -y git perl ruby
 RUN yum install -y perl-Data-Dumper perl-IPC-Cmd
 RUN yum install -y gcc gcc-c++ make ant ant-junit maven
 RUN yum install -y rpm-build createrepo zlib* rsync
+RUN curl https://rclone.org/install.sh | sudo bash
 # Install OpenJDK 8 and 11
 RUN yum install -y java-1.8.0-openjdk-devel java-11-openjdk-devel
 
@@ -21,7 +22,6 @@ RUN update-alternatives --set java /usr/lib/jvm/java-1.8.0-openjdk/bin/java
 RUN update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-1.8.0-openjdk/bin/javac 1
 RUN update-alternatives --set javac /usr/lib/jvm/java-1.8.0-openjdk/bin/javac
 
-RUN curl https://rclone.org/install.sh | sudo bash
 RUN yum install -y https://vault.centos.org/centos/8/PowerTools/x86_64/os/Packages/xerces-j2-2.11.0-34.module_el8.0.0+30+832da3a1.noarch.rpm \
 		   https://vault.centos.org/centos/8/PowerTools/x86_64/os/Packages/xml-commons-resolver-1.2-26.module_el8.0.0+30+832da3a1.noarch.rpm \
 		   https://vault.centos.org/centos/8/PowerTools/x86_64/os/Packages/xalan-j2-2.7.1-38.module_el8.0.0+30+832da3a1.noarch.rpm \
