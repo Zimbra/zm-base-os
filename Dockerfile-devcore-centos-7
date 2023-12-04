@@ -12,7 +12,8 @@ RUN yum install -y git perl ruby
 RUN yum install -y perl-Data-Dumper perl-IPC-Cmd
 RUN yum install -y gcc gcc-c++ make
 RUN yum install -y java-1.8.0-openjdk ant ant-junit maven
-RUN yum install -y rpm-build createrepo
+RUN yum install -y rpm-build createrepo rsync
+RUN curl https://rclone.org/install.sh | sudo bash
 
 # USERS
 RUN useradd -ms /bin/bash -G wheel build
